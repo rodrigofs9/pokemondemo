@@ -1,4 +1,4 @@
-package com.pokemondemo.ui.theme
+package com.pokemondemo.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

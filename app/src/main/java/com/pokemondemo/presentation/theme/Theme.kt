@@ -1,4 +1,4 @@
-package com.pokemondemo.ui.theme
+package com.pokemondemo.presentation.theme
 
 import android.app.Activity
 import android.os.Build
