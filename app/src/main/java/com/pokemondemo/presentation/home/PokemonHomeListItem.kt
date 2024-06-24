@@ -7,28 +7,21 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults.cardElevation
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -38,53 +31,44 @@ import com.pokemondemo.domain.model.PokemonType
 import com.pokemondemo.presentation.theme.PokemonDemoTheme
 
 @Composable
-fun PokemonHomeListItem(
-    pokemon: Pokemon,
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth(),
+fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(130.dp)
     ) {
         Box(
-            modifier = modifier
-                .background(
-                    color = Color.LightGray,
-                    shape = RoundedCornerShape(16.dp)
-                )
-                .padding(16.dp)
-                .fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+                .height(115.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(Color.LightGray)
         ) {
             Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(start = 16.dp, end = 16.dp)
             ) {
                 Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(end = 16.dp)
+                    modifier = Modifier.weight(1f)
                 ) {
                     Text(text = pokemon.id, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                     Text(text = pokemon.name, fontSize = 14.sp)
                     Text(text = pokemon.types.first().name, fontSize = 14.sp)
                 }
-                Box(
-                    modifier = Modifier
-                        .offset(y = (-64).dp),
-                    contentAlignment = Alignment.TopEnd
-                ) {
-                    AsyncImage(
-                        model = pokemon.imageUrl,
-                        contentDescription = "imagem do pokémon ${pokemon.name}",
-                        Modifier
-                            .width(130.dp)
-                            .height(130.dp),
-                        placeholder = painterResource(id = R.drawable.bulbasaur),
-                        contentScale = ContentScale.Crop
-                    )
-                }
             }
         }
+        AsyncImage(
+            model = pokemon.imageUrl,
+            contentDescription = "imagem do pokémon ${pokemon.name}",
+            Modifier.size(130.dp)
+                .align(Alignment.TopEnd)
+                .offset(y = (-20).dp),
+            placeholder = painterResource(id = R.drawable.bulbasaur),
+            contentScale = ContentScale.Crop
+        )
     }
 }
 
@@ -102,12 +86,5 @@ private fun PokemonHomeListItemPreview() {
                 ),
             )
         }
-    }
-}
-
-fun merge(nums1: IntArray, m: Int, nums2: IntArray, n: Int): Unit {
-    nums2.forEach {
-        if (nums1.contains(it).not())
-            nums1.toMutableList().add(it)
     }
 }

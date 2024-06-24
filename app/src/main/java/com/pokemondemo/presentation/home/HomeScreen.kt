@@ -3,7 +3,6 @@ package com.pokemondemo.presentation.home
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -64,16 +63,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             label = { Text(text = "Qual pokémon você procura?") },
             placeholder = { Text("Qual pokémon você procura?") })
         LazyColumn(
-            modifier = Modifier
-                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(bottom = 16.dp)
+            contentPadding = PaddingValues(16.dp)
         ) {
             items(pokemonList) { pokemon ->
-                PokemonHomeListItem(
-                    pokemon = pokemon,
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                )
+                PokemonHomeListItem(pokemon = pokemon,)
             }
         }
     }
