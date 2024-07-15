@@ -15,46 +15,32 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pokemondemo.domain.model.Pokemon
-import com.pokemondemo.domain.model.PokemonType
 import com.pokemondemo.presentation.theme.PokemonDemoTheme
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
-        var searchText by remember { mutableStateOf("") }
-        val pokemonList = listOf(
-            Pokemon(
-                id = "001",
-                name = "Bulbasaur",
-                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-                types = listOf(PokemonType(name = "Grass"), PokemonType(name = "Poison"))
-            ),
-            Pokemon(
-                id = "007",
-                name = "Squirtle",
-                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
-                types = listOf(PokemonType(name = "Water"))
-            ),
-            Pokemon(
-                id = "004",
-                name = "Charmander",
-                imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
-                types = listOf(PokemonType(name = "Fire"))
-            ),
-        )
+fun HomeScreen(
+    viewModel: HomeScreenViewModel
+) {
+    val state by viewModel.uiState.collectAsState()
+    HomeScreen(state = state)
+}
+
+@Composable
+fun HomeScreen(
+    state: HomeScreenState = HomeScreenState()
+) {
+    Column {
+        val text = state.searchText
+        val searchedPokemonList = state.searchedPokemonList
+
         OutlinedTextField(
-            value = searchText,
-            onValueChange = { newValue ->
-                searchText = newValue
-            },
+            value = text,
+            onValueChange = state.onSearchChange,
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth(),
@@ -66,8 +52,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(16.dp)
         ) {
-            items(pokemonList) { pokemon ->
-                PokemonHomeListItem(pokemon = pokemon,)
+            items(searchedPokemonList) { pokemon ->
+                PokemonHomeListItem(pokemon = pokemon)
             }
         }
     }
