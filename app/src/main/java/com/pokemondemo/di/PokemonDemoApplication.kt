@@ -8,10 +8,13 @@ import org.koin.core.context.startKoin
 class PokemonDemoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+
+        val appModules = listOf(viewModelModule, useCaseModule, repositoryModule, daoModule)
+
         startKoin {
             androidLogger()
             androidContext(this@PokemonDemoApplication)
-            modules(appModule)
+            modules(appModules)
         }
     }
 }

@@ -2,9 +2,8 @@ package com.pokemondemo.data
 
 import com.pokemondemo.domain.model.Pokemon
 import com.pokemondemo.domain.model.PokemonType
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class PokemonDao {
     companion object {
@@ -32,7 +31,7 @@ class PokemonDao {
         )
     }
 
-    fun getPokemonList(): StateFlow<List<Pokemon>> = products.asStateFlow()
+    fun getPokemonList(): Flow<List<Pokemon>> = products
 
     fun save(product: Pokemon) {
         products.value += product
