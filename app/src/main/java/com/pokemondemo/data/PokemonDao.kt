@@ -32,8 +32,4 @@ class PokemonDao {
     }
 
     fun getPokemonList(): Flow<List<Pokemon>> = products
-
-    fun save(product: Pokemon) {
-        products.value += product
-    }
 }
