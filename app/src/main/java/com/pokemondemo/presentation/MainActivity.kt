@@ -23,8 +23,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             App {
-                val viewModel by viewModels<HomeScreenViewModel>()
-                HomeScreen(viewModel)
+                HomeScreen()
             }
         }
     }

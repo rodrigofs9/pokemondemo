@@ -21,10 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pokemondemo.presentation.theme.PokemonDemoTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeScreenViewModel
+    viewModel: HomeScreenViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
     HomeScreen(state = state)
@@ -32,7 +33,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeScreen(
-    state: HomeScreenState = HomeScreenState()
+    state: HomeScreenState
 ) {
     Column {
         val text = state.searchText
