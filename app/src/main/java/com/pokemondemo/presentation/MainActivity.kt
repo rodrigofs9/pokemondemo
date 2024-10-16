@@ -19,14 +19,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.pokemondemo.navigation.AppDestination
-import com.pokemondemo.navigation.bottomAppBarItems
+import com.pokemondemo.navigation.PokemonNavHost
+import com.pokemondemo.navigation.menuRoute
+import com.pokemondemo.navigation.navigateSingleTopWithPopUpTo
+import com.pokemondemo.navigation.pokemonListRoute
 import com.pokemondemo.presentation.common.BottomAppBar
 import com.pokemondemo.presentation.common.BottomAppBarItem
+import com.pokemondemo.presentation.common.bottomAppBarItems
 import com.pokemondemo.presentation.home.HomeScreen
 import com.pokemondemo.presentation.home.HomeScreenState
 import com.pokemondemo.presentation.theme.PokemonDemoTheme
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             LaunchedEffect(Unit) {
                 navController.addOnDestinationChangedListener { _, _, _ ->
-                    val routes = navController.backQueue.map {
+                    val routes = navController.currentBackStack.value.map {
                         it.destination.route
                     }
                     Log.i("MainActivity", "onCreate: back stack - $routes")
@@ -47,44 +48,29 @@ class MainActivity : ComponentActivity() {
             }
             val backStackEntryState by navController.currentBackStackEntryAsState()
             val currentDestination = backStackEntryState?.destination
-
+            val currentRoute = currentDestination?.route
             val selectedItem by remember(currentDestination) {
-                val item = currentDestination?.let { destination ->
-                    bottomAppBarItems.find {
-                        it.destination.route == destination.route
-                    }
-                } ?: bottomAppBarItems.first()
+                val item = when (currentRoute) {
+                    pokemonListRoute -> BottomAppBarItem.Home
+                    menuRoute -> BottomAppBarItem.Menu
+                    else -> BottomAppBarItem.Home
+                }
                 mutableStateOf(item)
             }
-            val containsInBottomAppBarItems = currentDestination?.let { destination ->
-                bottomAppBarItems.find {
-                    it.destination.route == destination.route
-                }
-            } != null
+            val containsInBottomAppBarItems = when(currentRoute) {
+                pokemonListRoute, menuRoute -> true
+                else -> false
+            }
 
             App(
                 bottomAppBarItemSelected = selectedItem,
-                onBottomAppBarItemSelectedChange = {
-                    val route = it.destination.route
-                    navController.navigate(route) {
-                        launchSingleTop = true
-                        popUpTo(route)
-                    }
+                onBottomAppBarItemSelectedChange = { item ->
+                    navController.navigateSingleTopWithPopUpTo(item)
                 },
                 showTopBar = containsInBottomAppBarItems,
                 showBottomBar = containsInBottomAppBarItems,
             ) {
-                NavHost(
-                    navController = navController,
-                    startDestination = AppDestination.Home.route
-                ) {
-                    composable(AppDestination.Home.route) {
-                        HomeScreen()
-                    }
-                    composable(AppDestination.Menu.route) {
-                        HomeScreen()
-                    }
-                }
+                PokemonNavHost(navController)
             }
         }
     }

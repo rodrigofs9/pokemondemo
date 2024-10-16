@@ -4,6 +4,8 @@ import com.pokemondemo.data.PokemonDao
 import com.pokemondemo.data.repository.HomeScreenRepositoryImpl
 import com.pokemondemo.domain.repository.HomeScreenRepository
 import com.pokemondemo.domain.usecase.GetPokemonListUseCase
+import com.pokemondemo.navigation.model.DetailsArgs
+import com.pokemondemo.presentation.details.DetailsScreenViewModel
 import com.pokemondemo.presentation.home.HomeScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -16,26 +18,20 @@ val viewModelModule = module {
             )
         )
     }
+
+    viewModel { (args: DetailsArgs) ->
+        DetailsScreenViewModel(args)
+    }
 }
 
 val useCaseModule = module {
-    factory {
-        GetPokemonListUseCase(
-            homeScreenRepository = get()
-        )
-    }
+    factory { GetPokemonListUseCase(homeScreenRepository = get()) }
 }
 
 val repositoryModule = module {
-    single<HomeScreenRepository> {
-        HomeScreenRepositoryImpl(
-            dao = get()
-        )
-    }
+    single<HomeScreenRepository> { HomeScreenRepositoryImpl(dao = get()) }
 }
 
 val daoModule = module {
-    single {
-        PokemonDao()
-    }
+    single { PokemonDao() }
 }

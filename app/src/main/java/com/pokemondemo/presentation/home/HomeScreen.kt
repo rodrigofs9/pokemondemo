@@ -1,5 +1,6 @@
 package com.pokemondemo.presentation.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,20 +21,23 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pokemondemo.navigation.model.DetailsArgs
 import com.pokemondemo.presentation.theme.PokemonDemoTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
+    onNavigateToDetails: (DetailsArgs) -> Unit = {},
     viewModel: HomeScreenViewModel = koinViewModel()
 ) {
     val state by viewModel.uiState.collectAsState()
-    HomeScreen(state = state)
+    HomeScreen(state = state, onNavigateToDetails = onNavigateToDetails)
 }
 
 @Composable
 fun HomeScreen(
-    state: HomeScreenState
+    state: HomeScreenState,
+    onNavigateToDetails: (DetailsArgs) -> Unit = {},
 ) {
     Column {
         val text = state.searchText
@@ -54,7 +58,15 @@ fun HomeScreen(
             contentPadding = PaddingValues(16.dp)
         ) {
             items(searchedPokemonList) { pokemon ->
-                PokemonHomeListItem(pokemon = pokemon)
+                PokemonHomeListItem(pokemon = pokemon, modifier = Modifier.clickable {
+                    onNavigateToDetails(
+                        DetailsArgs(
+                            name = pokemon.name,
+                            imageUrl = pokemon.imageUrl,
+                            description = "descrição"
+                        )
+                    )
+                })
             }
         }
     }
