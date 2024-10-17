@@ -33,12 +33,12 @@ import com.pokemondemo.presentation.theme.PokemonDemoTheme
 @Composable
 fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(130.dp)
     ) {
         Box(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp)
                 .height(115.dp)
@@ -47,12 +47,12 @@ fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxHeight()
                     .padding(start = 16.dp, end = 16.dp)
             ) {
                 Column(
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 ) {
                     Text(text = pokemon.id, fontSize = 16.sp, fontWeight = FontWeight.Bold)
                     Text(text = pokemon.name, fontSize = 14.sp)
@@ -63,7 +63,7 @@ fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
         AsyncImage(
             model = pokemon.imageUrl,
             contentDescription = "imagem do pokémon ${pokemon.name}",
-            Modifier.size(130.dp)
+            modifier.size(130.dp)
                 .align(Alignment.TopEnd)
                 .offset(y = (-20).dp),
             placeholder = painterResource(id = R.drawable.bulbasaur),

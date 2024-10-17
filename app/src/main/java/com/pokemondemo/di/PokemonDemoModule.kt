@@ -19,8 +19,8 @@ val viewModelModule = module {
         )
     }
 
-    viewModel { (args: DetailsArgs) ->
-        DetailsScreenViewModel(args)
+    viewModel {
+        DetailsScreenViewModel()
     }
 }
 

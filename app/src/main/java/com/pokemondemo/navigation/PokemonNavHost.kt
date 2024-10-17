@@ -11,6 +11,7 @@ fun PokemonNavHost(navController: NavHostController) {
         startDestination = homeGraphRoute
     ) {
         homeGraph(navController)
+        menuListScreen(navController)
         pokemonDetailsScreen(navController)
     }
 }

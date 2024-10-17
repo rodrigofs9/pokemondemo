@@ -8,24 +8,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DetailsScreenViewModel(private val args: DetailsArgs) : ViewModel() {
+class DetailsScreenViewModel : ViewModel() {
 
     private val _uiState: MutableStateFlow<DetailsScreenState> = MutableStateFlow(
         DetailsScreenState()
     )
     val uiState get() = _uiState.asStateFlow()
 
-    init {
-        getPokemonDetails()
-    }
-
-    private fun getPokemonDetails() {
+    fun getPokemonDetails(id: String) {
         viewModelScope.launch {
             _uiState.update { currentState ->
                 currentState.copy(
-                    name = args.name,
-                    imageUrl = args.imageUrl,
-                    description = args.description,
+                    name = id,
+                    imageUrl = "",
+                    description = "teeste descricaoooo",
                 )
             }
         }
