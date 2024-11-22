@@ -10,21 +10,22 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit
 
-private const val READ_TIMEOUT = 30L
-private const val WRITE_TIMEOUT = 10L
+private const val API_KEY = "apiKey"
 private const val CONNECT_TIMEOUT = 30L
+private const val HASH = "hash"
+private const val READ_TIMEOUT = 30L
+private const val TIMESTAMP = "ts"
+private const val TIMESTAMP_DEFAULT = "1"
+private const val WRITE_TIMEOUT = 10L
 
 class RetrofitClient {
     private val requestIntercept = { chain: Interceptor.Chain ->
         val original = chain.request()
         val originalHttpUrl = original.url
         val url = originalHttpUrl.newBuilder()
-            .addQueryParameter("ts", "1")
-            .addQueryParameter(
-                "hash",
-                getHash(BuildConfig.HASH)
-            ) //md5(ts+privateKey+publicKey)
-            .addQueryParameter("apikey", BuildConfig.API_KEY)
+            .addQueryParameter(TIMESTAMP, TIMESTAMP_DEFAULT)
+            .addQueryParameter(HASH, getHash()) //md5(ts+privateKey+publicKey)
+            .addQueryParameter(API_KEY, BuildConfig.API_KEY)
             .build()
 
         val requestBuilder = original.newBuilder().url(url)
@@ -61,8 +62,9 @@ class RetrofitClient {
             .build()
     }
 
-    private fun getHash(s: String?): String {
-        if (!s.isNullOrEmpty()) {
+    private fun getHash(): String {
+        val s = BuildConfig.HASH
+        if (s.isNotEmpty()) {
             val md5 = "MD5"
             try { // Create MD5 Hash
                 val digest = MessageDigest.getInstance(md5)

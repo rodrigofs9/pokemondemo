@@ -23,7 +23,7 @@ fun NavGraphBuilder.homeGraph(navController: NavHostController) {
 fun NavController.navigateSingleTopWithPopUpTo(
     item: BottomAppBarItem
 ) {
-    val (route, navigate) = when (item) {
+    val (_, navigate) = when (item) {
         BottomAppBarItem.Home -> Pair(marvelHomeRoute, ::navigateToPokemonList)
         BottomAppBarItem.Heroes -> Pair(heroesRoute, ::navigateToMenu)
     }

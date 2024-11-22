@@ -6,7 +6,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.marveldemo.presentation.heroes.HeroesScreen
-import com.marveldemo.presentation.home.HomeScreen
 
 internal const val heroesRoute = "heroes"
 

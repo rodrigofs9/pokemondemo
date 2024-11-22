@@ -14,7 +14,6 @@ import com.marveldemo.presentation.details.DetailsScreenViewModel
 import com.marveldemo.presentation.heroes.HeroesScreenViewModel
 import com.marveldemo.presentation.home.HomeScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
