@@ -3,6 +3,7 @@ package com.marveldemo.presentation.common
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -11,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import com.marveldemo.presentation.theme.PokemonDemoTheme
+import com.marveldemo.presentation.theme.HeroDemoTheme
 
 sealed class BottomAppBarItem(
     val label: String,
@@ -22,13 +23,13 @@ sealed class BottomAppBarItem(
         icon = Icons.Filled.Home
     )
 
-    data object Menu : BottomAppBarItem(
-        label = "Menu",
-        icon = Icons.Filled.Menu
+    data object Heroes : BottomAppBarItem(
+        label = "Heroes",
+        icon = Icons.Filled.Person
     )
 }
 
-val bottomAppBarItems = listOf(BottomAppBarItem.Home, BottomAppBarItem.Menu)
+val bottomAppBarItems = listOf(BottomAppBarItem.Home, BottomAppBarItem.Heroes)
 
 @Composable
 fun BottomAppBar(
@@ -54,7 +55,7 @@ fun BottomAppBar(
 @Preview
 @Composable
 fun BottomAppBarPreview() {
-    PokemonDemoTheme {
+    HeroDemoTheme {
         BottomAppBar(
             item = bottomAppBarItems.first(),
             items = bottomAppBarItems

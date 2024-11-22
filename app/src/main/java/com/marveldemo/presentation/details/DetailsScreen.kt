@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.marveldemo.R
-import com.marveldemo.presentation.theme.PokemonDemoTheme
+import com.marveldemo.presentation.theme.HeroDemoTheme
 
 @Composable
 fun DetailsScreen(
@@ -75,7 +75,7 @@ fun DetailsScreen(
 @Preview(showSystemUi = true)
 @Composable
 private fun HomeScreenPreview() {
-    PokemonDemoTheme {
+    HeroDemoTheme {
         Surface {
             DetailsScreen(state = DetailsScreenState())
         }

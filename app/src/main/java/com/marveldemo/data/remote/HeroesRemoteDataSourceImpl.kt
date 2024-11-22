@@ -13,8 +13,8 @@ class HeroesRemoteDataSourceImpl(private val marvelService: MarvelService) :
 }
 
 fun HeroesResponse.HeroResponse.toDomain() = Hero(
-    id = id,
-    name = name,
-    description = description,
-    imageUrl = thumbnailResponse.path + "." + thumbnailResponse.extension
+    id = id ?: 0,
+    name = name.orEmpty(),
+    description = description.orEmpty(),
+    imageUrl = thumbnailResponse?.thumbnailPath.orEmpty() + "." + thumbnailResponse?.thumbnailExtension.orEmpty()
 )

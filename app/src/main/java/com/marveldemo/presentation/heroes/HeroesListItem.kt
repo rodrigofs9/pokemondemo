@@ -1,4 +1,4 @@
-package com.marveldemo.presentation.home
+package com.marveldemo.presentation.heroes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -21,17 +21,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.marveldemo.R
-import com.marveldemo.domain.model.Pokemon
-import com.marveldemo.domain.model.PokemonType
+import com.marveldemo.domain.model.Hero
 import com.marveldemo.presentation.theme.HeroDemoTheme
 
 @Composable
-fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
+fun HeroesListItem(hero: Hero, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -54,16 +54,22 @@ fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
                 Column(
                     modifier = modifier.weight(1f)
                 ) {
-                    Text(text = pokemon.id, fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                    Text(text = pokemon.name, fontSize = 14.sp)
-                    Text(text = pokemon.types.first().name, fontSize = 14.sp)
+                    Text(text = hero.id.toString(), fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                    Text(text = hero.name, fontSize = 14.sp)
+                    Text(
+                        text = hero.description,
+                        fontSize = 14.sp,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
             }
         }
         AsyncImage(
-            model = pokemon.imageUrl,
-            contentDescription = "imagem do pokémon ${pokemon.name}",
-            modifier.size(130.dp)
+            model = hero.imageUrl,
+            contentDescription = "imagem do ${hero.name}",
+            modifier
+                .size(130.dp)
                 .align(Alignment.TopEnd)
                 .offset(y = (-20).dp),
             placeholder = painterResource(id = R.drawable.bulbasaur),
@@ -74,15 +80,15 @@ fun PokemonHomeListItem(pokemon: Pokemon, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun PokemonHomeListItemPreview() {
+private fun HeroesListItemPreview() {
     HeroDemoTheme {
         Surface {
-            PokemonHomeListItem(
-                pokemon = Pokemon(
-                    id = "001",
-                    name = "Bulbasaur",
+            HeroesListItem(
+                hero = Hero(
+                    id = 1,
+                    name = "Spider Man",
                     imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-                    types = listOf(PokemonType(name = "Grass"), PokemonType(name = "Poison"))
+                    description = "Description"
                 ),
             )
         }

@@ -1,3 +1,15 @@
+import java.util.Properties
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
+
+if (localPropertiesFile.exists()) {
+    localProperties.load(localPropertiesFile.inputStream())
+}
+
+val apiKey: String = localProperties.getProperty("API_KEY", "default_api_key")
+val hashKey: String = localProperties.getProperty("HASH", "default_hash")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -7,13 +19,13 @@ plugins {
 }
 
 android {
-    namespace = "com.pokemondemo"
-    compileSdk = 34
+    namespace = "com.marveldemo"
+    compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.pokemondemo"
+        applicationId = "com.marveldemo"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -30,6 +42,13 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "API_KEY", "\"${apiKey}\"")
+            buildConfigField("String", "HASH", "\"${hashKey}\"")
+        }
+
+        debug {
+            buildConfigField("String", "API_KEY", "\"${apiKey}\"")
+            buildConfigField("String", "HASH", "\"${hashKey}\"")
         }
     }
     compileOptions {
@@ -41,6 +60,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -72,6 +92,7 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.okhttp.interceptor)
     implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

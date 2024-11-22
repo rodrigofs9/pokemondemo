@@ -17,20 +17,20 @@ data class HeroesResponse (
     @Serializable
     data class HeroResponse(
         @SerialName("id")
-        val id: Int,
+        val id: Int? = null,
         @SerialName("name")
-        val name: String,
+        val name: String? = null,
         @SerialName("description")
-        val description: String,
+        val description: String? = null,
         @SerialName("thumbnail")
-        val thumbnailResponse: ThumbnailResponse,
+        val thumbnailResponse: ThumbnailResponse? = null,
     )
 
     @Serializable
     data class ThumbnailResponse(
         @SerialName("path")
-        val path: String,
+        val thumbnailPath: String? = null,
         @SerialName("extension")
-        val extension: String,
+        val thumbnailExtension: String? = null,
     )
 }

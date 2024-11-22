@@ -22,7 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.marveldemo.navigation.model.DetailsArgs
-import com.marveldemo.presentation.theme.PokemonDemoTheme
+import com.marveldemo.presentation.theme.HeroDemoTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -75,7 +75,7 @@ fun HomeScreen(
 @Preview(showSystemUi = true)
 @Composable
 private fun HomeScreenPreview() {
-    PokemonDemoTheme {
+    HeroDemoTheme {
         Surface {
             HomeScreen()
         }

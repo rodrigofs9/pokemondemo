@@ -22,15 +22,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.marveldemo.navigation.PokemonNavHost
-import com.marveldemo.navigation.menuRoute
+import com.marveldemo.navigation.heroesRoute
 import com.marveldemo.navigation.navigateSingleTopWithPopUpTo
-import com.marveldemo.navigation.pokemonListRoute
+import com.marveldemo.navigation.marvelHomeRoute
 import com.marveldemo.presentation.common.BottomAppBar
 import com.marveldemo.presentation.common.BottomAppBarItem
 import com.marveldemo.presentation.common.bottomAppBarItems
 import com.marveldemo.presentation.home.HomeScreen
 import com.marveldemo.presentation.home.HomeScreenState
-import com.marveldemo.presentation.theme.PokemonDemoTheme
+import com.marveldemo.presentation.theme.HeroDemoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,14 +51,14 @@ class MainActivity : ComponentActivity() {
             val currentRoute = currentDestination?.route
             val selectedItem by remember(currentDestination) {
                 val item = when (currentRoute) {
-                    pokemonListRoute -> BottomAppBarItem.Home
-                    menuRoute -> BottomAppBarItem.Menu
+                    marvelHomeRoute -> BottomAppBarItem.Home
+                    heroesRoute -> BottomAppBarItem.Heroes
                     else -> BottomAppBarItem.Home
                 }
                 mutableStateOf(item)
             }
             val containsInBottomAppBarItems = when(currentRoute) {
-                pokemonListRoute, menuRoute -> true
+                marvelHomeRoute, heroesRoute -> true
                 else -> false
             }
 
@@ -85,7 +85,7 @@ fun App(
     showBottomBar: Boolean = false,
     content: @Composable () -> Unit = {},
 ) {
-    PokemonDemoTheme {
+    HeroDemoTheme {
         Surface {
             Scaffold(
                 topBar = {

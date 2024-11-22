@@ -9,7 +9,8 @@ class MarvelDemoApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val appModules = listOf(viewModelModule, useCaseModule, repositoryModule, daoModule)
+        val appModules =
+            listOf(viewModelModule, useCaseModule, repositoryModule, daoModule, networkModule)
 
         startKoin {
             androidLogger()

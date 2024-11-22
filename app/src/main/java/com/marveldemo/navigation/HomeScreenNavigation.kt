@@ -11,7 +11,7 @@ internal const val homeGraphRoute = "home"
 
 fun NavGraphBuilder.homeGraph(navController: NavHostController) {
     navigation(
-        startDestination = pokemonListRoute,
+        startDestination = marvelHomeRoute,
         route = homeGraphRoute
     ) {
         pokemonListScreen(navController)
@@ -24,13 +24,14 @@ fun NavController.navigateSingleTopWithPopUpTo(
     item: BottomAppBarItem
 ) {
     val (route, navigate) = when (item) {
-        BottomAppBarItem.Home -> Pair(pokemonListRoute, ::navigateToPokemonList)
-        BottomAppBarItem.Menu -> Pair(menuRoute, ::navigateToMenu)
+        BottomAppBarItem.Home -> Pair(marvelHomeRoute, ::navigateToPokemonList)
+        BottomAppBarItem.Heroes -> Pair(heroesRoute, ::navigateToMenu)
     }
 
     val navOptions = navOptions {
         launchSingleTop = true
-        popUpTo(route)
+        restoreState = true
+        //popUpTo(route)
     }
     navigate(navOptions)
 }
