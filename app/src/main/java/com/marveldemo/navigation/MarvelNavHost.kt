@@ -5,13 +5,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 
 @Composable
-fun PokemonNavHost(navController: NavHostController) {
+fun MarvelNavHost(navController: NavHostController) {
     NavHost(
         navController = navController,
         startDestination = homeGraphRoute
     ) {
-        homeGraph(navController)
-        menuListScreen(navController)
-        pokemonDetailsScreen(navController)
+        marvelGraph(navController)
+        favoriteHeroesListScreen(navController)
+        heroesDetailsScreen(navController)
     }
 }

@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.marveldemo.navigation.PokemonNavHost
-import com.marveldemo.navigation.heroesRoute
+import com.marveldemo.navigation.MarvelNavHost
+import com.marveldemo.navigation.favoriteHeroesRoute
+import com.marveldemo.navigation.marvelHeroesRoute
 import com.marveldemo.navigation.navigateSingleTopWithPopUpTo
-import com.marveldemo.navigation.marvelHomeRoute
 import com.marveldemo.presentation.common.BottomAppBar
 import com.marveldemo.presentation.common.BottomAppBarItem
 import com.marveldemo.presentation.common.bottomAppBarItems
@@ -51,14 +51,14 @@ class MainActivity : ComponentActivity() {
             val currentRoute = currentDestination?.route
             val selectedItem by remember(currentDestination) {
                 val item = when (currentRoute) {
-                    marvelHomeRoute -> BottomAppBarItem.Home
-                    heroesRoute -> BottomAppBarItem.Heroes
-                    else -> BottomAppBarItem.Home
+                    marvelHeroesRoute -> BottomAppBarItem.Heroes
+                    favoriteHeroesRoute -> BottomAppBarItem.Favorites
+                    else -> BottomAppBarItem.Heroes
                 }
                 mutableStateOf(item)
             }
             val containsInBottomAppBarItems = when(currentRoute) {
-                marvelHomeRoute, heroesRoute -> true
+                marvelHeroesRoute, favoriteHeroesRoute -> true
                 else -> false
             }
 
@@ -70,7 +70,7 @@ class MainActivity : ComponentActivity() {
                 showTopBar = containsInBottomAppBarItems,
                 showBottomBar = containsInBottomAppBarItems,
             ) {
-                PokemonNavHost(navController)
+                MarvelNavHost(navController)
             }
         }
     }
@@ -119,7 +119,5 @@ fun App(
 @Preview
 @Composable
 fun AppPreview() {
-    App {
-        HomeScreen(HomeScreenState())
-    }
+    App { HomeScreen(HomeScreenState()) }
 }

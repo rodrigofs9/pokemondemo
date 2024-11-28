@@ -5,13 +5,13 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.marveldemo.presentation.heroes.HeroesScreen
+import com.marveldemo.presentation.favorites.FavoriteHeroesScreen
 
-internal const val heroesRoute = "heroes"
+internal const val favoriteHeroesRoute = "favoriteHeroes"
 
-fun NavGraphBuilder.menuListScreen(navController: NavHostController) {
-    composable(heroesRoute) {
-        HeroesScreen(
+fun NavGraphBuilder.favoriteHeroesListScreen(navController: NavHostController) {
+    composable(favoriteHeroesRoute) {
+        FavoriteHeroesScreen(
             onNavigateToDetails = { details ->
                 navController.navigateToDetails(details.name, details.imageUrl)
             },
@@ -19,8 +19,8 @@ fun NavGraphBuilder.menuListScreen(navController: NavHostController) {
     }
 }
 
-fun NavController.navigateToMenu(
+fun NavController.navigateToFavoriteHeroes(
     navOptions: NavOptions? = null
 ){
-    navigate(heroesRoute, navOptions)
+    navigate(favoriteHeroesRoute, navOptions)
 }

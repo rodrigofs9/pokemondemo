@@ -13,13 +13,13 @@ import com.marveldemo.presentation.details.DetailsScreen
 import com.marveldemo.presentation.details.DetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
-private const val pokemonDetailsRoute = "pokemonDetails"
+private const val heroesDetailsRoute = "heroesDetails"
 private const val name = "name"
 private const val imageUrl = "imageUrl"
 
-fun NavGraphBuilder.pokemonDetailsScreen(navController: NavHostController) {
+fun NavGraphBuilder.heroesDetailsScreen(navController: NavHostController) {
     composable(
-        "$pokemonDetailsRoute/{$name}/{$imageUrl}",
+        "$heroesDetailsRoute/{$name}/{$imageUrl}",
         arguments = listOf(
             navArgument("name") {
                 type = NavType.StringType
@@ -47,5 +47,5 @@ fun NavGraphBuilder.pokemonDetailsScreen(navController: NavHostController) {
 }
 
 fun NavController.navigateToDetails(name: String, imageUrl: String) {
-    navigate("$pokemonDetailsRoute/$name/$imageUrl")
+    navigate("$heroesDetailsRoute/$name/$imageUrl")
 }

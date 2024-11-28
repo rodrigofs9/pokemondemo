@@ -2,7 +2,7 @@ package com.marveldemo.presentation.common
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -17,18 +17,18 @@ sealed class BottomAppBarItem(
     val label: String,
     val icon: ImageVector
 ){
-    data object Home : BottomAppBarItem(
-        label = "Home",
+    data object Heroes : BottomAppBarItem(
+        label = "Heroes",
         icon = Icons.Filled.Home
     )
 
-    data object Heroes : BottomAppBarItem(
-        label = "Heroes",
-        icon = Icons.Filled.Person
+    data object Favorites : BottomAppBarItem(
+        label = "Favorites",
+        icon = Icons.Filled.Star
     )
 }
 
-val bottomAppBarItems = listOf(BottomAppBarItem.Home, BottomAppBarItem.Heroes)
+val bottomAppBarItems = listOf(BottomAppBarItem.Heroes, BottomAppBarItem.Favorites)
 
 @Composable
 fun BottomAppBar(

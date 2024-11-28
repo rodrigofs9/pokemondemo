@@ -12,11 +12,13 @@ import java.util.concurrent.TimeUnit
 
 private const val API_KEY = "apiKey"
 private const val CONNECT_TIMEOUT = 30L
+private const val MD5 = "MD5"
 private const val HASH = "hash"
 private const val READ_TIMEOUT = 30L
 private const val TIMESTAMP = "ts"
 private const val TIMESTAMP_DEFAULT = "1"
 private const val WRITE_TIMEOUT = 10L
+private const val BASE_URL = "https://gateway.marvel.com/"
 
 class RetrofitClient {
     private val requestIntercept = { chain: Interceptor.Chain ->
@@ -56,7 +58,7 @@ class RetrofitClient {
 
     fun create(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://gateway.marvel.com/")
+            .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -67,7 +69,7 @@ class RetrofitClient {
         if (s.isNotEmpty()) {
             val md5 = "MD5"
             try { // Create MD5 Hash
-                val digest = MessageDigest.getInstance(md5)
+                val digest = MessageDigest.getInstance(MD5)
                 digest.update(s.toByteArray())
                 val messageDigest = digest.digest()
                 // Create Hex String

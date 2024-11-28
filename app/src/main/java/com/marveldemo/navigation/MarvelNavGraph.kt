@@ -9,14 +9,14 @@ import com.marveldemo.presentation.common.BottomAppBarItem
 
 internal const val homeGraphRoute = "home"
 
-fun NavGraphBuilder.homeGraph(navController: NavHostController) {
+fun NavGraphBuilder.marvelGraph(navController: NavHostController) {
     navigation(
-        startDestination = marvelHomeRoute,
+        startDestination = marvelHeroesRoute,
         route = homeGraphRoute
     ) {
-        pokemonListScreen(navController)
-        pokemonDetailsScreen(navController)
-        menuListScreen(navController)
+        heroesListScreen(navController)
+        heroesDetailsScreen(navController)
+        favoriteHeroesListScreen(navController)
     }
 }
 
@@ -24,8 +24,8 @@ fun NavController.navigateSingleTopWithPopUpTo(
     item: BottomAppBarItem
 ) {
     val (_, navigate) = when (item) {
-        BottomAppBarItem.Home -> Pair(marvelHomeRoute, ::navigateToPokemonList)
-        BottomAppBarItem.Heroes -> Pair(heroesRoute, ::navigateToMenu)
+        BottomAppBarItem.Heroes -> Pair(marvelHeroesRoute, ::navigateToHeroesList)
+        BottomAppBarItem.Favorites -> Pair(favoriteHeroesRoute, ::navigateToFavoriteHeroes)
     }
 
     val navOptions = navOptions {

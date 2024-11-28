@@ -12,10 +12,11 @@ val hashKey: String = localProperties.getProperty("HASH", "default_hash")
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -93,6 +94,8 @@ dependencies {
     implementation(libs.okhttp.interceptor)
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
+    implementation(libs.room)
+    ksp(libs.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
