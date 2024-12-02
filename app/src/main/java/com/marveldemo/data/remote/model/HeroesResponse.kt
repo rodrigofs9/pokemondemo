@@ -23,14 +23,14 @@ data class HeroesResponse (
         @SerialName("description")
         val description: String? = null,
         @SerialName("thumbnail")
-        val thumbnailResponse: ThumbnailResponse? = null,
+        val thumbnail: ThumbnailResponse? = null,
     )
 
     @Serializable
     data class ThumbnailResponse(
         @SerialName("path")
-        val thumbnailPath: String? = null,
+        val path: String? = null,
         @SerialName("extension")
-        val thumbnailExtension: String? = null,
+        val extension: String? = null,
     )
 }

@@ -13,7 +13,7 @@ fun NavGraphBuilder.favoriteHeroesListScreen(navController: NavHostController) {
     composable(favoriteHeroesRoute) {
         FavoriteHeroesScreen(
             onNavigateToDetails = { details ->
-                navController.navigateToDetails(details.name, details.imageUrl)
+                navController.navigateToDetails(details.name)
             },
         )
     }

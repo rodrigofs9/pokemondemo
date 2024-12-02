@@ -14,12 +14,12 @@ class DetailsScreenViewModel : ViewModel() {
     )
     val uiState get() = _uiState.asStateFlow()
 
-    fun getPokemonDetails(name: String, imageUrl: String) {
+    fun getPokemonDetails(name: String) {
         viewModelScope.launch {
             _uiState.update { currentState ->
                 currentState.copy(
                     name = name,
-                    imageUrl = imageUrl,
+                    imageUrl = "",
                     description = "teeste descricaoooo",
                 )
             }

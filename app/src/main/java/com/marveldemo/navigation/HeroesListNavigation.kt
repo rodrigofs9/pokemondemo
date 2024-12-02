@@ -13,7 +13,7 @@ fun NavGraphBuilder.heroesListScreen(navController: NavHostController) {
     composable(marvelHeroesRoute) {
         HeroesScreen(
             onNavigateToDetails = { details ->
-                navController.navigateToDetails(details.name, details.imageUrl)
+                navController.navigateToDetails(details.name)
             },
         )
     }

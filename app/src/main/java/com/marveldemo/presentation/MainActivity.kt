@@ -92,7 +92,7 @@ fun App(
                     if (showTopBar) {
                         CenterAlignedTopAppBar(
                             title = {
-                                Text(text = "Pokémon Demo")
+                                Text(text = "Marvel Demo")
                             },
                         )
                     }

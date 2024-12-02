@@ -20,6 +20,6 @@ class HeroesRemoteDataSourceImpl(private val marvelService: MarvelService) :
         id = id ?: 0,
         name = name.orEmpty(),
         description = description.orEmpty(),
-        imageUrl = thumbnailResponse?.thumbnailPath.orEmpty() + "." + thumbnailResponse?.thumbnailExtension.orEmpty()
+        imageUrl = thumbnail?.path.orEmpty() + "." + thumbnail?.extension.orEmpty()
     )
 }

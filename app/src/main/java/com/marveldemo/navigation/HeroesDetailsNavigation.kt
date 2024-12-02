@@ -15,27 +15,24 @@ import org.koin.androidx.compose.koinViewModel
 
 private const val heroesDetailsRoute = "heroesDetails"
 private const val name = "name"
-private const val imageUrl = "imageUrl"
 
 fun NavGraphBuilder.heroesDetailsScreen(navController: NavHostController) {
     composable(
-        "$heroesDetailsRoute/{$name}/{$imageUrl}",
+        "$heroesDetailsRoute/{$name}",
         arguments = listOf(
             navArgument("name") {
-                type = NavType.StringType
-            }, navArgument("imageUrl") {
                 type = NavType.StringType
             }
         )
     ) { backStackEntry ->
         val name = backStackEntry.arguments?.getString(name).orEmpty()
-        val imageUrl = backStackEntry.arguments?.getString(imageUrl).orEmpty()
+        //val imageUrl = backStackEntry.arguments?.getString(imageUrl).orEmpty()
 
-        if (name.isNotEmpty() && imageUrl.isNotEmpty()){
+        if (name.isNotEmpty()){
             val viewModel: DetailsScreenViewModel = koinViewModel()
             val uiState by viewModel.uiState.collectAsState()
             LaunchedEffect(Unit) {
-                viewModel.getPokemonDetails(name, imageUrl)
+                viewModel.getPokemonDetails(name)
             }
             DetailsScreen(state = uiState)
         } else {
@@ -46,6 +43,6 @@ fun NavGraphBuilder.heroesDetailsScreen(navController: NavHostController) {
     }
 }
 
-fun NavController.navigateToDetails(name: String, imageUrl: String) {
-    navigate("$heroesDetailsRoute/$name/$imageUrl")
+fun NavController.navigateToDetails(name: String) {
+    navigate("$heroesDetailsRoute/$name")
 }

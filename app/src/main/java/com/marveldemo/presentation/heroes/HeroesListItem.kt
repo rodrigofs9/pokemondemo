@@ -19,14 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.marveldemo.R
 import com.marveldemo.domain.model.Hero
 import com.marveldemo.presentation.theme.HeroDemoTheme
 
@@ -54,11 +52,17 @@ fun HeroesListItem(hero: Hero, modifier: Modifier = Modifier) {
                 Column(
                     modifier = modifier.weight(1f)
                 ) {
-                    Text(text = hero.id.toString(), fontSize = 16.sp, fontWeight = FontWeight.Bold)
-                    Text(text = hero.name, fontSize = 14.sp)
+                    Text(
+                        text = hero.name,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
                     Text(
                         text = hero.description,
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Thin,
+                        color = Color.Black,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -72,7 +76,6 @@ fun HeroesListItem(hero: Hero, modifier: Modifier = Modifier) {
                 .size(130.dp)
                 .align(Alignment.TopEnd)
                 .offset(y = (-20).dp),
-            placeholder = painterResource(id = R.drawable.bulbasaur),
             contentScale = ContentScale.Crop
         )
     }

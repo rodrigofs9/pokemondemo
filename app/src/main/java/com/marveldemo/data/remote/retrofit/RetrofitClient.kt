@@ -10,7 +10,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit
 
-private const val API_KEY = "apiKey"
+private const val API_KEY = "apikey"
 private const val CONNECT_TIMEOUT = 30L
 private const val MD5 = "MD5"
 private const val HASH = "hash"
@@ -67,7 +67,6 @@ class RetrofitClient {
     private fun getHash(): String {
         val s = BuildConfig.HASH
         if (s.isNotEmpty()) {
-            val md5 = "MD5"
             try { // Create MD5 Hash
                 val digest = MessageDigest.getInstance(MD5)
                 digest.update(s.toByteArray())
