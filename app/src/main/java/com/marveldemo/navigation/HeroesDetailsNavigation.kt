@@ -14,19 +14,16 @@ import com.marveldemo.presentation.details.DetailsScreenViewModel
 import org.koin.androidx.compose.koinViewModel
 
 private const val heroesDetailsRoute = "heroesDetails"
-private const val name = "name"
+private const val ARG_NAME = "name"
 
 fun NavGraphBuilder.heroesDetailsScreen(navController: NavHostController) {
     composable(
-        "$heroesDetailsRoute/{$name}",
+        "$heroesDetailsRoute/{$ARG_NAME}",
         arguments = listOf(
-            navArgument("name") {
-                type = NavType.StringType
-            }
+            navArgument(ARG_NAME) { type = NavType.StringType },
         )
     ) { backStackEntry ->
-        val name = backStackEntry.arguments?.getString(name).orEmpty()
-        //val imageUrl = backStackEntry.arguments?.getString(imageUrl).orEmpty()
+        val name = backStackEntry.arguments?.getString(ARG_NAME).orEmpty()
 
         if (name.isNotEmpty()){
             val viewModel: DetailsScreenViewModel = koinViewModel()
@@ -34,7 +31,7 @@ fun NavGraphBuilder.heroesDetailsScreen(navController: NavHostController) {
             LaunchedEffect(Unit) {
                 viewModel.getPokemonDetails(name)
             }
-            DetailsScreen(state = uiState)
+            DetailsScreen(state = uiState, onFavoriteClick = { viewModel.toggleFavorite() })
         } else {
             LaunchedEffect(Unit) {
                 navController.navigateUp()

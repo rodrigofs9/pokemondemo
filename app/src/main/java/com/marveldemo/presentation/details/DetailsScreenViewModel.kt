@@ -14,13 +14,23 @@ class DetailsScreenViewModel : ViewModel() {
     )
     val uiState get() = _uiState.asStateFlow()
 
-    fun getPokemonDetails(name: String) {
+    fun getPokemonDetails(name: String, imageUrl: String = "", description: String = "") {
         viewModelScope.launch {
             _uiState.update { currentState ->
                 currentState.copy(
                     name = name,
-                    imageUrl = "",
-                    description = "teeste descricaoooo",
+                    imageUrl = imageUrl,
+                    description = description,
+                )
+            }
+        }
+    }
+
+    fun toggleFavorite() {
+        viewModelScope.launch {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    isFavorite = !currentState.isFavorite
                 )
             }
         }
